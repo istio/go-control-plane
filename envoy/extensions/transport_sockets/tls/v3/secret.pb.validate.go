@@ -119,12 +119,7 @@ func (m *SdsSecretConfig) Validate() error {
 		return nil
 	}
 
-	if utf8.RuneCountInString(m.GetName()) < 1 {
-		return SdsSecretConfigValidationError{
-			field:  "Name",
-			reason: "value length must be at least 1 runes",
-		}
-	}
+	// no validation rules for Name
 
 	if v, ok := interface{}(m.GetSdsResourceLocator()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
